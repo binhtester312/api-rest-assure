@@ -33,19 +33,6 @@ api-rest-assure/
 
 ---
 
-## 📚 Nội Dung Bài Học
-
-### 🔹 Day 1: HTTP Requests Cơ Bản
-* Thực hiện gửi các HTTP method chuẩn: **GET**, **POST**, **PUT**, **DELETE**.
-* Validate status code, trích xuất dữ liệu (`jsonPath`) và sử dụng biến động giữa các test.
-
-### 🔹 Day 2: Các Cách Tạo POST Request Payload
-1. **Dùng HashMap:** Nhanh gọn cho dữ liệu đơn giản.
-2. **Dùng thư viện Org.JSON (`JSONObject`):** Tạo JSON linh hoạt, gọi `.toString()`.
-3. **Dùng POJO Class:** Chuẩn dự án thực tế (Best Practice), an toàn kiểu dữ liệu.
-4. **Đọc từ file JSON bên ngoài (`body.json`):** Dùng `JSONTokener` để đọc file tĩnh lớn.
-
----
 
 ## 🚀 Hướng Dẫn Chạy Test
 
