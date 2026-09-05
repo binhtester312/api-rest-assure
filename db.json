@@ -1,0 +1,56 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "John",
+      "job": "Tester",
+      "phone": "987654321",
+      "courses": [
+        "Java",
+        "Selenium"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Kim",
+      "job": "BA",
+      "phone": "11223344",
+      "courses": [
+        "Agile",
+        "Jira"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Alex",
+      "job": "DevOps",
+      "phone": "55667788",
+      "courses": [
+        "Docker",
+        "Kubernetes"
+      ]
+    },
+    {
+      "courses": [
+        "Java",
+        "Python",
+        "Rest API"
+      ],
+      "phone": "12345",
+      "name": "Thong",
+      "job": "Developer",
+      "id": 4
+    },
+    {
+      "courses": [
+        "Java",
+        "Python",
+        "Rest API"
+      ],
+      "phone": "12345",
+      "name": "Thong",
+      "job": "Developer",
+      "id": 5
+    }
+  ]
+}

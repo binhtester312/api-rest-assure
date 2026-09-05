@@ -1,0 +1,10 @@
+{
+  "name": "Thong",
+  "job": "Developer",
+  "phone": "12345",
+  "courses": [
+    "Java",
+    "Python",
+    "Rest API"
+  ]
+}
