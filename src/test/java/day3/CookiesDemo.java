@@ -37,7 +37,12 @@ public class CookiesDemo {
         // get all cookies info
         Map<String, String> cookies_values = res.getCookies();
 
-        System.out.println(cookies_values.keySet());
+        // System.out.println(cookies_values.keySet());
+
+        for (String k : cookies_values.keySet()) {
+            String cookie_value = res.getCookie(k);
+            System.out.println(k + "       " + cookie_value);
+        }
 
     }
 
