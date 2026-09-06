@@ -25,4 +25,18 @@ public class HeadersDemo {
 
     }
 
+    @Test(priority = 2)
+    public void getHeaders() {
+
+        Response res = given()
+
+        .when()
+                .get("https://www.google.com/");
+
+        // get single header info
+        String headervalue = res.getHeader("Content-Type");
+        System.out.println("The value of Content-type header is: " + headervalue);
+
+    }
+
 }
