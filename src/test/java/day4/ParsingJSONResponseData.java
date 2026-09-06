@@ -38,6 +38,9 @@ public class ParsingJSONResponseData {
                 Assert.assertEquals(res.getStatusCode(), 200); // validation 1
                 Assert.assertEquals(res.header("Content-Type"), "application/json; charset=utf-8");
 
+                String bookname = res.jsonPath().get("book[3].title").toString();
+                Assert.assertEquals(bookname, "The Lord of the Rings");
+
         }
 
 }
