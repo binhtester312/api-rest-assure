@@ -1,0 +1,2 @@
+This is Test1.txt file used for File Upload API testing.
+Created for Rest Assured automation course - Day 6.

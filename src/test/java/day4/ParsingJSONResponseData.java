@@ -16,17 +16,17 @@ public class ParsingJSONResponseData {
 
                 // Approach 1
                 /*
-                given()
-                                .contentType(ContentType.JSON)
-
-                                .when()
-                                .get("http://localhost:3000/store")
-
-                                .then()
-                                .statusCode(200)
-                                .header("Content-Type", "application/json; charset=utf-8")
-                                .body("book[3].title", equalTo("The Lord of the Rings"));
-                */
+                 * given()
+                 * .contentType(ContentType.JSON)
+                 * 
+                 * .when()
+                 * .get("http://localhost:3000/store")
+                 * 
+                 * .then()
+                 * .statusCode(200)
+                 * .header("Content-Type", "application/json; charset=utf-8")
+                 * .body("book[3].title", equalTo("The Lord of the Rings"));
+                 */
 
                 // Approach 2
 
@@ -37,22 +37,24 @@ public class ParsingJSONResponseData {
                                 .get("http://localhost:3000/store");
 
                 /*
-                Assert.assertEquals(res.getStatusCode(), 200); // validation 1
-                Assert.assertEquals(res.header("Content-Type"), "application/json; charset=utf-8");
-
-                String bookname = res.jsonPath().get("book[3].title").toString();
-                Assert.assertEquals(bookname, "The Lord of the Rings");
-                */
+                 * Assert.assertEquals(res.getStatusCode(), 200); // validation 1
+                 * Assert.assertEquals(res.header("Content-Type"),
+                 * "application/json; charset=utf-8");
+                 * 
+                 * String bookname = res.jsonPath().get("book[3].title").toString();
+                 * Assert.assertEquals(bookname, "The Lord of the Rings");
+                 */
 
                 // JSONObject class
                 JSONObject jo = new JSONObject(res.asString()); // converting response to json object type
 
                 /*
-                for (int i = 0; i < jo.getJSONArray("book").length(); i++) {
-                        String bookTitle = jo.getJSONArray("book").getJSONObject(i).get("title").toString();
-                        System.out.println(bookTitle);
-                }
-                */
+                 * for (int i = 0; i < jo.getJSONArray("book").length(); i++) {
+                 * String bookTitle =
+                 * jo.getJSONArray("book").getJSONObject(i).get("title").toString();
+                 * System.out.println(bookTitle);
+                 * }
+                 */
 
                 boolean status = false;
 
@@ -66,6 +68,18 @@ public class ParsingJSONResponseData {
                 }
 
                 Assert.assertEquals(status, true);
+
+                // validate total price of books
+
+                double totalprice = 0;
+                for (int i = 0; i < jo.getJSONArray("book").length(); i++) {
+                        String price = jo.getJSONArray("book").getJSONObject(i).get("price").toString();
+
+                        totalprice = totalprice + Double.parseDouble(price);
+                }
+
+                System.out.println("total price of books is:" + totalprice);
+                Assert.assertEquals(totalprice, 297.44);
 
         }
 

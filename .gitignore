@@ -98,6 +98,9 @@ artifacts/
 # Node modules
 node_modules/
 
+# File server uploads (files được upload lên local server)
+file-server/uploads/
+
 # Xray token cache
 .xray_token_cache.json
 
