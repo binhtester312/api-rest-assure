@@ -23,7 +23,7 @@ public class UserTests {
         userPayload = new User();
 
         userPayload.setId(faker.idNumber().hashCode());
-        userPayload.setUsername(faker.name().username());
+        userPayload.setUsername(faker.internet().username());
         userPayload.setFirstName(faker.name().firstName());
         userPayload.setLastName(faker.name().lastName());
         userPayload.setEmail(faker.internet().safeEmailAddress());
@@ -40,7 +40,7 @@ public class UserTests {
     }
 
     // -------------------------------------------------------------------------
-    //  TC02: Lấy thông tin user — GET /user/{username}
+    // TC02: Lấy thông tin user — GET /user/{username}
     // -------------------------------------------------------------------------
     @Test(priority = 2)
     public void testReadUser() {
@@ -52,7 +52,7 @@ public class UserTests {
     }
 
     // -------------------------------------------------------------------------
-    //  TC03: Cập nhật user — PUT /user/{username}
+    // TC03: Cập nhật user — PUT /user/{username}
     // -------------------------------------------------------------------------
     @Test(priority = 3)
     public void testUpdateUser() {
@@ -69,7 +69,7 @@ public class UserTests {
     }
 
     // -------------------------------------------------------------------------
-    //  TC04: Xóa user — DELETE /user/{username}
+    // TC04: Xóa user — DELETE /user/{username}
     // -------------------------------------------------------------------------
     @Test(priority = 4)
     public void testDeleteUser() {
