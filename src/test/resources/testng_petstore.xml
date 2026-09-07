@@ -19,6 +19,7 @@
         <classes>
             <class name="api.test.UserTests" />
             <class name="api.test.DDTests" />
+            <class name="api.test.UserTests2" />
         </classes>
     </test>
 
