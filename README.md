@@ -57,6 +57,22 @@ api-rest-assure/
 │   │       ├── Student.java             # POJO Student model
 │   │       └── SerilizationDeserilization.java  # Jackson ObjectMapper demo
 │   │
+│   ├── api/                             # 🏬 Petstore Framework (End-to-End Enterprise)
+│   │   ├── endpoints/
+│   │   │   ├── Routes.java              # 📍 Cách 1: URL constants
+│   │   │   ├── UserEndPoints.java       # 🚀 HTTP CRUD actions (Routes)
+│   │   │   └── UserEndPoints2.java      # 🚀 HTTP CRUD actions (routes.properties via ResourceBundle)
+│   │   ├── payload/
+│   │   │   └── User.java                # 📦 POJO model cho Petstore User
+│   │   ├── utilities/
+│   │   │   ├── XLUtility.java           # 📊 Đọc/ghi Excel (Apache POI)
+│   │   │   ├── DataProviders.java       # 🎲 TestNG DataProviders (Data-Driven)
+│   │   │   └── ExtentReportManager.java # 📈 ITestListener sinh báo cáo HTML ExtentReports
+│   │   └── test/
+│   │       ├── UserTests.java           # 🧪 CRUD Test đơn lẻ (Faker)
+│   │       ├── UserTests2.java          # 🧪 CRUD Test dùng properties
+│   │       └── DDTests.java             # 🧪 Data-Driven Testing đọc từ Excel
+│   │
 │   ├── base/
 │   │   └── BaseTest.java               # 🏗️ @BeforeSuite: setup RestAssured, Logging
 │   ├── config/
@@ -74,11 +90,19 @@ api-rest-assure/
 │   └── tests/
 │       └── UserCRUDTest.java           # ✅ 5 test cases CRUD + API Chaining
 │
+├── testData/
+│   └── Userdata.xlsx                   # 📗 File Excel chứa dữ liệu Data-Driven Test
+├── reports/                            # 📊 Báo cáo kiểm thử ExtentReports HTML
+├── logs/
+│   └── petstore.log                    # 📝 Nhật ký ghi bởi Log4j2
 ├── src/test/resources/
+│   ├── routes.properties               # 🌐 Cấu hình API URLs cho Petstore
+│   ├── log4j2.xml                      # ⚙️ Cấu hình Log4j2 logging
 │   ├── config.properties               # URL, timeout (không chứa secrets)
 │   ├── testng.xml                      # Suite: learning.day1 (learning)
 │   ├── testng_chaining.xml             # Suite: learning.day8 API Chaining
-│   └── testng_framework.xml            # Suite: Framework (UserCRUDTest)
+│   ├── testng_framework.xml            # Suite: GoRest Framework (UserCRUDTest)
+│   └── testng_petstore.xml             # Suite: Petstore Framework (10 TCs PASS)
 │
 ├── db.json                             # Mock data cho json-server
 ├── body.json                           # JSON payload mẫu
@@ -91,7 +115,18 @@ api-rest-assure/
 
 ## 🚀 Hướng Dẫn Chạy Test
 
-### 1. Chạy Framework (Production-style — 5 TC CRUD)
+### 1. Chạy Petstore Swagger Framework (Chuẩn bài giảng thầy — 10 TCs PASS)
+
+Không cần cài đặt token hay mock server, chạy trực tiếp public API Petstore Swagger:
+
+```bash
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng_petstore.xml
+```
+
+* 📝 Nhật ký ghi tại: `logs/petstore.log`
+* 📊 Báo cáo đồ họa ExtentReports mở tại: `reports/Test-Report-[timestamp].html`
+
+### 2. Chạy GoRest Framework (Production-style — 5 TC CRUD)
 
 ```bash
 # Bước 1: Set Bearer Token (lấy từ https://gorest.co.in)
