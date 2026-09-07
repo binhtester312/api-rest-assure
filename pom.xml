@@ -115,6 +115,18 @@
             <artifactId>datafaker</artifactId>
             <version>${datafaker.version}</version>
         </dependency>
+
+        <!-- 12. Apache POI: Đọc và ghi dữ liệu file Excel cho Data-Driven Testing -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.5</version>
+        </dependency>
     </dependencies>
 
     <build>
