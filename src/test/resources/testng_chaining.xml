@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="GoRest API Chaining Suite" verbose="1">
+    <test name="User CRUD Chaining Tests">
+        <classes>
+            <class name="learning.day8.CreateUser" />
+            <class name="learning.day8.GetUser" />
+            <class name="learning.day8.UpdateUser" />
+            <class name="learning.day8.DeleteUser" />
+        </classes>
+    </test>
+</suite>

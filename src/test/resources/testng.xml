@@ -3,8 +3,7 @@
 <suite name="API Automation Test Suite" verbose="1">
     <test name="REST Assured Basic Tests">
         <packages>
-            <package name="day1.*" />
-            <package name="day1" />
+            <package name="learning.day1" />
         </packages>
     </test>
 </suite>
