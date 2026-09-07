@@ -39,43 +39,34 @@ public class UserTests {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    // -------------------------------------------------------------------------
-    // TC02: Lấy thông tin user — GET /user/{username}
-    // -------------------------------------------------------------------------
     @Test(priority = 2)
-    public void testReadUser() {
+    public void testGetUserByName() {
         Response response = UserEndPoints.readUser(this.userPayload.getUsername());
-
         response.then().log().all();
 
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    // -------------------------------------------------------------------------
-    // TC03: Cập nhật user — PUT /user/{username}
-    // -------------------------------------------------------------------------
     @Test(priority = 3)
-    public void testUpdateUser() {
-        // Cập nhật tên mới
+    public void testUpdateUserByName() {
+        // update data using payload
         userPayload.setFirstName(faker.name().firstName());
         userPayload.setLastName(faker.name().lastName());
         userPayload.setEmail(faker.internet().safeEmailAddress());
 
         Response response = UserEndPoints.updateUser(this.userPayload.getUsername(), userPayload);
-
-        response.then().log().all();
+        response.then().log().body();
 
         Assert.assertEquals(response.getStatusCode(), 200);
+
+        // Checking data after update
+        Response responseAfterupdate = UserEndPoints.readUser(this.userPayload.getUsername());
+        Assert.assertEquals(responseAfterupdate.getStatusCode(), 200);
     }
 
-    // -------------------------------------------------------------------------
-    // TC04: Xóa user — DELETE /user/{username}
-    // -------------------------------------------------------------------------
     @Test(priority = 4)
-    public void testDeleteUser() {
+    public void testDeleteUserByName() {
         Response response = UserEndPoints.deleteUser(this.userPayload.getUsername());
-
-        response.then().log().all();
 
         Assert.assertEquals(response.getStatusCode(), 200);
     }
