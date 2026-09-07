@@ -1,0 +1,2 @@
+This is Test2.txt file used for Multiple File Upload API testing.
+Created for Rest Assured automation course - Day 6.

@@ -18,7 +18,7 @@
         <jackson.version>2.17.2</jackson.version>
         <gson.version>2.11.0</gson.version>
         <json-org.version>20240303</json-org.version>
-        <scribejava.version>8.3.3</scribejava.version>
+        <scribejava.version>2.5.3</scribejava.version>
         <lombok.version>1.18.34</lombok.version>
         <datafaker.version>2.4.0</datafaker.version>
         <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
@@ -81,6 +81,12 @@
         </dependency>
 
         <!-- 8. ScribeJava: Hỗ trợ OAuth 1.0 / 2.0 Authentication cho REST Assured -->
+        <dependency>
+            <groupId>com.github.scribejava</groupId>
+            <artifactId>scribejava-core</artifactId>
+            <version>${scribejava.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>com.github.scribejava</groupId>
             <artifactId>scribejava-apis</artifactId>

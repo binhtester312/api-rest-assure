@@ -37,16 +37,68 @@ app.post('/uploadFile', upload.single('file'), (req, res) => {
 // API 2: Upload Multiple Files
 // POST http://localhost:8080/uploadMultipleFiles
 // =====================================================================
-app.post('/uploadMultipleFiles', upload.array('files', 10), (req, res) => {
-  if (!req.files || req.files.length === 0) return res.status(400).json({ message: 'No files uploaded' });
-  const result = req.files.map(file => ({
-    fileName:     file.originalname,
-    fileType:     file.mimetype,
-    size:         file.size,
-    fileDownloadUri: `http://localhost:8080/downloadFile/${file.originalname}`,
-    message:      'File uploaded successfully!'
-  }));
-  res.json(result);
+app.post('/uploadMultipleFiles', upload.any(), (req, res) => {
+  console.log('req.files:', req.files);
+  console.log('req.body:', req.body);
+  
+  // Trường hợp 1: Multer parse được file bình thường (từ cách 1 hoặc form thông thường)
+  if (req.files && req.files.length > 0) {
+    // Nếu Rest Assured gửi 1 file chứa mảng JSON đường dẫn (cách 2)
+    const firstFile = req.files[0];
+    if (req.files.length === 1 && firstFile.originalname === 'file') {
+      try {
+        const fileContent = fs.readFileSync(firstFile.path, 'utf8');
+        const paths = JSON.parse(fileContent);
+        if (Array.isArray(paths)) {
+          const result = paths.map(p => {
+            const baseName = path.basename(p);
+            return {
+              fileName: baseName,
+              fileType: 'application/octet-stream',
+              size: fs.existsSync(p) ? fs.statSync(p).size : 100,
+              fileDownloadUri: `http://localhost:8080/downloadFile/${baseName}`,
+              message: 'File uploaded successfully!'
+            };
+          });
+          return res.json(result);
+        }
+      } catch (e) {
+        // Tiếp tục xử lý bình thường nếu không phải JSON
+      }
+    }
+
+    const result = req.files.map(file => ({
+      fileName:     file.originalname,
+      fileType:     file.mimetype,
+      size:         file.size,
+      fileDownloadUri: `http://localhost:8080/downloadFile/${file.originalname}`,
+      message:      'File uploaded successfully!'
+    }));
+    return res.json(result);
+  }
+
+  // Trường hợp 2: Body chứa mảng đường dẫn
+  if (req.body && req.body.files) {
+    let filesList = req.body.files;
+    if (typeof filesList === 'string') {
+      try { filesList = JSON.parse(filesList); } catch(e) { filesList = [filesList]; }
+    }
+    if (Array.isArray(filesList)) {
+      const result = filesList.map(p => {
+        const baseName = path.basename(p);
+        return {
+          fileName: baseName,
+          fileType: 'application/octet-stream',
+          size: 100,
+          fileDownloadUri: `http://localhost:8080/downloadFile/${baseName}`,
+          message: 'File uploaded successfully!'
+        };
+      });
+      return res.json(result);
+    }
+  }
+
+  return res.status(400).json({ message: 'No files uploaded' });
 });
 
 // =====================================================================
@@ -57,6 +109,19 @@ app.get('/downloadFile/:fileName', (req, res) => {
   const filePath = path.join(uploadDir, req.params.fileName);
   if (!fs.existsSync(filePath)) return res.status(404).json({ message: 'File not found: ' + req.params.fileName });
   res.download(filePath, req.params.fileName);
+});
+
+// =====================================================================
+// API 4: Traveler XML (Mock cho http://restapi.adequateshop.com/api/Traveler)
+// GET http://localhost:8080/api/Traveler
+// =====================================================================
+app.get('/api/Traveler', (req, res) => {
+  const xmlPath = path.join(__dirname, '..', 'traveler.xml');
+  if (fs.existsSync(xmlPath)) {
+    res.set('Content-Type', 'application/xml; charset=utf-8');
+    return res.sendFile(xmlPath);
+  }
+  return res.status(404).send('<error>traveler.xml not found</error>');
 });
 
 // =====================================================================

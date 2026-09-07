@@ -12,12 +12,13 @@ public class LoggingDemo {
 
         given()
 
-        .when()
+                .when()
                 .get("https://reqres.in/api/users?page=2")
 
-        .then()
-                // .log().body()
-                .log().cookies();
+                .then()
+                // .log().body();
+                // .log().cookies();
+                .log().headers();
 
     }
 
