@@ -11,9 +11,14 @@
 -->
 <suite name="Petstore API Framework Suite" verbose="1">
 
-    <test name="User CRUD Tests - Petstore">
+    <listeners>
+        <listener class-name="api.utilities.ExtentReportManager"/>
+    </listeners>
+
+    <test name="User Tests">
         <classes>
             <class name="api.test.UserTests" />
+            <class name="api.test.DDTests" />
         </classes>
     </test>
 
